@@ -90,11 +90,13 @@ explore: customer_service_level_agreement {
   }
 }
 
-# table: Interval_Type; No linked tables (Verified)
+# table: IntervalType; No linked tables (Verified)
 explore: interval_type {}
 
+# table: MailClassType; No linked tables (Verified)
 explore: mail_class_type {}
 
+# table: MeterAccount; linked to table Customer (Verified)
 explore: meter_account {
   join: customer {
     type: left_outer
@@ -103,6 +105,7 @@ explore: meter_account {
   }
 }
 
+# table: MeterData; Linked to tables MailClassType, MeterAccount, and Customer (Verified)
 explore: meter_data {
   join: mail_class_type {
     type: left_outer
