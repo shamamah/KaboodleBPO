@@ -6,10 +6,10 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
-# table Customer
+# table Customer; No linked tables (Verified)
 explore: customer {}
 
-# table CustomerService; linked to tables Customer and ServiceType
+# table CustomerService; linked to tables Customer and ServiceType (Verified)
 explore: customer_service {
   join: customer {
     type: left_outer
@@ -19,12 +19,12 @@ explore: customer_service {
 
   join: service_type {
     type: left_outer
-    sql_on: ${customer_service.servicetype_id}_id} = ${service_type.servicetype_id} ;;
+    sql_on: ${customer_service.servicetype_id} = ${service_type.servicetype_id} ;;
     relationship: many_to_one
   }
 }
 
-# table CustomerServiceJob; linked to tables ServiceJobType, CustomerService, and Customer
+# table CustomerServiceJob; linked to tables ServiceJobType, CustomerService, Customer, and Service_Type (Verified)
 explore: customer_service_job {
   join: service_job_type {
     type: left_outer
@@ -41,6 +41,12 @@ explore: customer_service_job {
   join: customer {
     type: left_outer
     sql_on: ${customer_service.customer_id} = ${customer.customer_id} ;;
+    relationship: many_to_one
+  }
+
+  join: service_type {
+    type: left_outer
+    sql_on: ${customer_service.servicetype_id} = ${service_type.servicetype_id} ;;
     relationship: many_to_one
   }
 }
@@ -84,6 +90,7 @@ explore: customer_service_level_agreement {
   }
 }
 
+# table: Interval_Type; No linked tables (Verified)
 explore: interval_type {}
 
 explore: mail_class_type {}
@@ -146,8 +153,6 @@ explore: service_type {}
 
 explore: station_type {}
 
-explore: user_type {}
-
 explore: users {
   join: user_type {
     type: left_outer
@@ -155,3 +160,5 @@ explore: users {
     relationship: many_to_one
   }
 }
+
+explore: user_type {}
