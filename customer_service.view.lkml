@@ -3,7 +3,7 @@ view: customer_service {
 
   dimension: customer_id {
     type: number
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}.customer_id ;;
   }
 
