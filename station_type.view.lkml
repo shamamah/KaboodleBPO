@@ -36,6 +36,7 @@ view: station_type {
 
   dimension: stationtype_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.stationtype_id ;;
   }
 

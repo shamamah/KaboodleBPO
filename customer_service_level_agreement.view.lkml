@@ -3,6 +3,7 @@ view: customer_service_level_agreement {
 
   dimension: customerservicejob_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.customerservicejob_id ;;
   }
 

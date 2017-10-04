@@ -8,6 +8,7 @@ view: interval_type {
 
   dimension: intervaltype_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.intervaltype_id ;;
   }
 

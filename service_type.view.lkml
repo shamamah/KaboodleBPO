@@ -36,6 +36,7 @@ view: service_type {
 
   dimension: servicetype_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.servicetype_id ;;
   }
 

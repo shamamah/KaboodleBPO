@@ -9,6 +9,7 @@ view: customer_service {
 
   dimension: customerservice_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.customerservice_id ;;
   }
 
@@ -42,6 +43,7 @@ view: customer_service {
 
   dimension: servicetype_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.servicetype_id ;;
   }
 

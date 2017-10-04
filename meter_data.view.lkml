@@ -17,6 +17,7 @@ view: meter_data {
 
   dimension: mailclasstype_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.mailclasstype_id ;;
   }
 
@@ -37,11 +38,13 @@ view: meter_data {
 
   dimension: meteraccount_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.meteraccount_id ;;
   }
 
   dimension: meterdata_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.meterdata_id ;;
   }
 

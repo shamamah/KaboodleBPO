@@ -33,6 +33,7 @@ view: meter_account {
 
   dimension: meteraccount_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.meteraccount_id ;;
   }
 

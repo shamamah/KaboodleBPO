@@ -72,16 +72,19 @@ view: print_batch {
 
   dimension: printbatch_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.printbatch_id ;;
   }
 
   dimension: printbatchstatus_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.printbatchstatus_id ;;
   }
 
   dimension: servicejobtype_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.servicejobtype_id ;;
   }
 

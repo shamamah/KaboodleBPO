@@ -4,6 +4,7 @@ view: users {
   dimension: users_id {
     primary_key: yes
     type: number
+    hidden: yes
     sql: ${TABLE}.users_id ;;
   }
 
@@ -47,6 +48,7 @@ view: users {
 
   dimension: usertype_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.usertype_id ;;
   }
 

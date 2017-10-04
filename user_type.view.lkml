@@ -36,6 +36,7 @@ view: user_type {
 
   dimension: usertype_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.usertype_id ;;
   }
 

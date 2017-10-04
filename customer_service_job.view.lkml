@@ -3,11 +3,13 @@ view: customer_service_job {
 
   dimension: customerservice_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.customerservice_id ;;
   }
 
   dimension: customerservicejob_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.customerservicejob_id ;;
   }
 
@@ -41,6 +43,7 @@ view: customer_service_job {
 
   dimension: servicejobtype_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.servicejobtype_id ;;
   }
 

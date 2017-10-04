@@ -36,6 +36,7 @@ view: service_job_type {
 
   dimension: servicejobtype_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.servicejobtype_id ;;
   }
 

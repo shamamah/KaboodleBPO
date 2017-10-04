@@ -22,6 +22,7 @@ view: mail_class_type {
 
   dimension: mailclasstype_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.mailclasstype_id ;;
   }
 

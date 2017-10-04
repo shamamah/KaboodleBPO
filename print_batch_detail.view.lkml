@@ -65,6 +65,7 @@ view: print_batch_detail {
 
   dimension: printbatch_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.printbatch_id ;;
   }
 
@@ -89,6 +90,7 @@ view: print_batch_detail {
 
   dimension: stationtype_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.stationtype_id ;;
   }
 

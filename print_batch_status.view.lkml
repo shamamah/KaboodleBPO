@@ -36,6 +36,7 @@ view: print_batch_status {
 
   dimension: printbatchstatus_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.printbatchstatus_id ;;
   }
 
