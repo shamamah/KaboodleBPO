@@ -9,11 +9,20 @@ include: "*.dashboard"
 
 
 # table Customer; No linked tables (Verified)
-explore: customer {}
+explore: customer {
+  access_filter: {
+    field:customer.customer_name
+    user_attribute:customer
+  }
+}
 
 
 # table CustomerService; linked to tables Customer, ServiceType (Verified)
 explore: customer_service {
+  access_filter: {
+    field:customer.customer_name
+    user_attribute:customer
+  }
   join: customer {
     type: left_outer
     sql_on: ${customer_service.customer_id} = ${customer.customer_id} ;;
@@ -138,6 +147,10 @@ explore: meter_data {
 
 #table: PrintBatch; Linked to tables Customer, Users, ServiceJobType, PrintBatchStatus (Verified)
 explore: print_batch {
+  access_filter: {
+    field:customer.customer_name
+    user_attribute:customer
+  }
   join: customer {
     type: left_outer
     sql_on: ${print_batch.customer_id} = ${customer.customer_id} ;;
@@ -166,6 +179,10 @@ explore: print_batch {
 
 #table PrintBatchDetail; Linked to tables Users, PrintBatch, Customer, StationType, PrintBatchStatus, UserType (Verified)
 explore: print_batch_detail {
+  access_filter: {
+    field:customer.customer_name
+    user_attribute:customer
+  }
   join: users {
     type: left_outer
     sql_on: ${print_batch_detail.users_id} = ${users.users_id} ;;
