@@ -217,6 +217,12 @@ explore: print_batch_detail {
     sql_on: ${users.usertype_id} = ${user_type.usertype_id} ;;
     relationship: many_to_one
   }
+
+  join: service_job_type {
+    type: left_outer
+    sql_on: ${print_batch.servicejobtype_id} = ${service_job_type.servicejobtype_id} ;;
+    relationship: many_to_one
+  }
 }
 
 
