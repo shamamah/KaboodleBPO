@@ -24,6 +24,7 @@ view: users {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.last_modified_date ;;
   }
 
@@ -43,6 +44,7 @@ view: users {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.pcadded_date ;;
   }
 
@@ -54,6 +56,7 @@ view: users {
 
   measure: count {
     type: count
+    hidden: yes
     drill_fields: [users_id, first_name, last_name, print_batch.count, print_batch_detail.count]
   }
 }

@@ -41,6 +41,7 @@ view: print_batch_detail {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.last_modified_date ;;
   }
 
@@ -60,6 +61,7 @@ view: print_batch_detail {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.pcadded_date ;;
   }
 
@@ -71,6 +73,7 @@ view: print_batch_detail {
 
   dimension: printbatchdetail_num {
     type: number
+    hidden: yes
     sql: ${TABLE}.printbatchdetail_num ;;
   }
 
@@ -96,7 +99,7 @@ view: print_batch_detail {
 
   dimension: users_id {
     type: number
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}.users_id ;;
   }
 

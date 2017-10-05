@@ -3,6 +3,7 @@ view: mail_class_type {
 
   dimension: dscr {
     type: string
+    label: "Mail_Class_Type_Desc"
     sql: ${TABLE}.dscr ;;
   }
 
@@ -17,6 +18,7 @@ view: mail_class_type {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.last_modified_date ;;
   }
 
@@ -37,11 +39,13 @@ view: mail_class_type {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.pcadded_date ;;
   }
 
   measure: count {
     type: count
+    hidden: yes
     drill_fields: []
   }
 }

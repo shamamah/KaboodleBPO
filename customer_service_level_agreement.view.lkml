@@ -9,11 +9,13 @@ view: customer_service_level_agreement {
 
   dimension: data_table {
     type: string
+    hidden: yes
     sql: ${TABLE}.data_table ;;
   }
 
   dimension: end_column {
     type: string
+    hidden: yes
     sql: ${TABLE}.end_column ;;
   }
 
@@ -24,6 +26,7 @@ view: customer_service_level_agreement {
 
   dimension: intervaltype_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.intervaltype_id ;;
   }
 
@@ -38,6 +41,7 @@ view: customer_service_level_agreement {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.last_modified_date ;;
   }
 
@@ -52,6 +56,7 @@ view: customer_service_level_agreement {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.pcadded_date ;;
   }
 
@@ -62,11 +67,13 @@ view: customer_service_level_agreement {
 
   dimension: start_column {
     type: string
+    hidden: yes
     sql: ${TABLE}.start_column ;;
   }
 
   measure: count {
     type: count
+    hidden: yes
     drill_fields: []
   }
 }

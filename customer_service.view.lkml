@@ -24,6 +24,7 @@ view: customer_service {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.last_modified_date ;;
   }
 
@@ -38,6 +39,7 @@ view: customer_service {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.pcadded_date ;;
   }
 
@@ -49,6 +51,7 @@ view: customer_service {
 
   measure: count {
     type: count
+    hidden: yes
     drill_fields: [customer.customer_id, customer.customer_name]
   }
 }

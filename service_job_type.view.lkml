@@ -2,6 +2,7 @@ view: service_job_type {
   sql_table_name: dbo.ServiceJobType ;;
 
   dimension: dscr {
+    label: "Job_Type_Description"
     type: string
     sql: ${TABLE}.dscr ;;
   }
@@ -17,6 +18,7 @@ view: service_job_type {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.last_modified_date ;;
   }
 
@@ -31,6 +33,7 @@ view: service_job_type {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.pcadded_date ;;
   }
 
@@ -42,6 +45,7 @@ view: service_job_type {
 
   measure: count {
     type: count
+    hidden: yes
     drill_fields: []
   }
 }

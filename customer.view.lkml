@@ -19,6 +19,7 @@ view: customer {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.contract_start_date ;;
   }
 
@@ -29,11 +30,13 @@ view: customer {
 
   dimension: customer_number {
     type: number
+    hidden: yes
     sql: ${TABLE}.customer_number ;;
   }
 
   dimension: diamond_client {
     type: string
+    hidden: yes
     sql: ${TABLE}.Diamond_Client ;;
   }
 
@@ -48,6 +51,7 @@ view: customer {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.last_modified_date ;;
   }
 
@@ -62,16 +66,19 @@ view: customer {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.pcadded_date ;;
   }
 
   dimension: sla_reporting {
     type: string
+    hidden: yes
     sql: ${TABLE}.SLA_Reporting ;;
   }
 
   measure: count {
     type: count
+    hidden: yes
     drill_fields: [customer_id, customer_name, customer_service.count, meter_account.count, print_batch.count]
   }
 }

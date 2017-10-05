@@ -2,6 +2,7 @@ view: print_batch_status {
   sql_table_name: dbo.PrintBatchStatus ;;
 
   dimension: dscr {
+    label: "Description"
     type: string
     sql: ${TABLE}.dscr ;;
   }
@@ -17,6 +18,7 @@ view: print_batch_status {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.last_modified_date ;;
   }
 
@@ -31,6 +33,7 @@ view: print_batch_status {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.pcadded_date ;;
   }
 
@@ -42,6 +45,7 @@ view: print_batch_status {
 
   measure: count {
     type: count
+    hidden: yes
     drill_fields: []
   }
 }

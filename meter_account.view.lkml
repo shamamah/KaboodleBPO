@@ -3,12 +3,13 @@ view: meter_account {
 
   dimension: customer_id {
     type: number
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}.customer_ID ;;
   }
 
   dimension: dscr {
     type: string
+    label: "Account_Description"
     sql: ${TABLE}.dscr ;;
   }
 
@@ -23,6 +24,7 @@ view: meter_account {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.last_modified_date ;;
   }
 
@@ -48,6 +50,7 @@ view: meter_account {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.pcadded_date ;;
   }
 

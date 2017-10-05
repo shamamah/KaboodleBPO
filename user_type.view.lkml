@@ -3,6 +3,7 @@ view: user_type {
 
   dimension: dscr {
     type: string
+    label: "Type_Description"
     sql: ${TABLE}.dscr ;;
   }
 
@@ -17,6 +18,7 @@ view: user_type {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.last_modified_date ;;
   }
 
@@ -31,6 +33,7 @@ view: user_type {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.pcadded_date ;;
   }
 
@@ -42,6 +45,7 @@ view: user_type {
 
   measure: count {
     type: count
+    hidden: yes
     drill_fields: []
   }
 }

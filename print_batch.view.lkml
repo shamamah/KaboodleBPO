@@ -23,7 +23,7 @@ view: print_batch {
 
   dimension: customer_id {
     type: number
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}.customer_id ;;
   }
 
@@ -53,6 +53,7 @@ view: print_batch {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.last_modified_date ;;
   }
 
@@ -67,6 +68,7 @@ view: print_batch {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.pcadded_date ;;
   }
 
@@ -105,7 +107,7 @@ view: print_batch {
 
   dimension: users_id {
     type: number
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}.users_id ;;
   }
 
