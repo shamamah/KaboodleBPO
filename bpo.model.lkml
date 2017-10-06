@@ -9,32 +9,32 @@ include: "*.dashboard"
 
 
 # table Customer; No linked tables (Verified)
-explore: customer {
-  access_filter: {
-    field:customer.customer_name
-    user_attribute:customer
-  }
-}
+#explore: customer {
+#  access_filter: {
+#    field:customer.customer_name
+#    user_attribute:customer
+#  }
+#}
 
 
 # table CustomerService; linked to tables Customer, ServiceType (Verified)
-explore: customer_service {
-  access_filter: {
-    field:customer.customer_name
-    user_attribute:customer
-  }
-  join: customer {
-    type: left_outer
-    sql_on: ${customer_service.customer_id} = ${customer.customer_id} ;;
-    relationship: many_to_one
-  }
+#explore: customer_service {
+#  access_filter: {
+#    field:customer.customer_name
+#   user_attribute:customer
+#  }
+#  join: customer {
+#    type: left_outer
+#    sql_on: ${customer_service.customer_id} = ${customer.customer_id} ;;
+#    relationship: many_to_one
+#  }
 
-  join: service_type {
-    type: left_outer
-    sql_on: ${customer_service.servicetype_id} = ${service_type.servicetype_id} ;;
-    relationship: many_to_one
-  }
-}
+#  join: service_type {
+#    type: left_outer
+#    sql_on: ${customer_service.servicetype_id} = ${service_type.servicetype_id} ;;
+#    relationship: many_to_one
+#  }
+#}
 
 
 # table CustomerServiceJob; linked to tables ServiceJobType, CustomerService, Customer, Service_Type (Verified)
@@ -106,21 +106,21 @@ explore: customer_service_level_agreement {
 
 
 # table: IntervalType; No linked tables (Verified)
-explore: interval_type {}
+#explore: interval_type {}
 
 
 # table: MailClassType; No linked tables (Verified)
-explore: mail_class_type {}
+#explore: mail_class_type {}
 
 
 # table: MeterAccount; linked to table Customer (Verified)
-explore: meter_account {
-  join: customer {
-    type: left_outer
-    sql_on: ${meter_account.customer_id} = ${customer.customer_id} ;;
-    relationship: many_to_one
-  }
-}
+#explore: meter_account {
+#  join: customer {
+#    type: left_outer
+#    sql_on: ${meter_account.customer_id} = ${customer.customer_id} ;;
+#    relationship: many_to_one
+#  }
+#}
 
 
 # table: MeterData; Linked to tables MailClassType, MeterAccount, Customer (Verified)
@@ -227,19 +227,19 @@ explore: print_batch_detail {
 
 
 # table PrintBatchStatus; No linked tables (Verified)
-explore: print_batch_status {}
+#explore: print_batch_status {}
 
 
 # table ServiceJobType; No linked tables (Verified)
-explore: service_job_type {}
+#explore: service_job_type {}
 
 
 # table ServiceType; No linked tables (Verified)
-explore: service_type {}
+#explore: service_type {}
 
 
 # table StationType; No linked tables (Verified)
-explore: station_type {}
+#explore: station_type {}
 
 
 # table Users; Linked to table UserType (Verified)
@@ -253,4 +253,4 @@ explore: users {
 
 
 # table UserType; No linked tables (Verified)
-explore: user_type {}
+#explore: user_type {}

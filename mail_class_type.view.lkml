@@ -3,7 +3,7 @@ view: mail_class_type {
 
   dimension: dscr {
     type: string
-    label: "Mail_Class_Type_Desc"
+    label: "Description"
     sql: ${TABLE}.dscr ;;
   }
 

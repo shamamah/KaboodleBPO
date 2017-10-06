@@ -9,7 +9,7 @@ view: meter_account {
 
   dimension: dscr {
     type: string
-    label: "Account_Description"
+    label: "Description"
     sql: ${TABLE}.dscr ;;
   }
 

@@ -76,6 +76,7 @@ view: meter_data {
 
   measure: count {
     type: count
+    hidden: yes
     drill_fields: []
   }
 }

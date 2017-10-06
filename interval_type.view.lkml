@@ -3,7 +3,7 @@ view: interval_type {
 
   dimension: dscr {
     type: string
-    label: "Interval_Description"
+    label: "Description"
     sql: ${TABLE}.dscr ;;
   }
 

@@ -3,7 +3,7 @@ view: station_type {
 
   dimension: dscr {
     type: string
-    label: "Station_Type_Desc"
+    label: "Description"
     sql: ${TABLE}.dscr ;;
   }
 
