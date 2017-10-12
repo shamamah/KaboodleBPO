@@ -61,6 +61,7 @@ view: customer_service_level_agreement {
   }
 
   dimension: sla_percentage {
+    label: "SLA Percentage"
     type: number
     sql: ${TABLE}.sla_percentage ;;
   }

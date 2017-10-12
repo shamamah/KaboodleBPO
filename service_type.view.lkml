@@ -3,7 +3,7 @@ view: service_type {
 
   dimension: dscr {
     type: string
-    label: "Desription"
+    label: "Service Type Desription"
     sql: ${TABLE}.dscr ;;
   }
 

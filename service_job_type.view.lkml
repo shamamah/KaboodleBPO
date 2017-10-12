@@ -2,7 +2,7 @@ view: service_job_type {
   sql_table_name: dbo.ServiceJobType ;;
 
   dimension: dscr {
-    label: "Description"
+    label: "Service Job Type Description"
     type: string
     sql: ${TABLE}.dscr ;;
   }

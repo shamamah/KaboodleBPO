@@ -2,7 +2,7 @@ view: print_batch_status {
   sql_table_name: dbo.PrintBatchStatus ;;
 
   dimension: dscr {
-    label: "Description"
+    label: "Print Batch Status"
     type: string
     sql: ${TABLE}.dscr ;;
   }
