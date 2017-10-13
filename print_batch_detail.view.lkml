@@ -1,6 +1,14 @@
 view: print_batch_detail {
   sql_table_name: dbo.PrintBatchDetail ;;
 
+  dimension: compound_primary_key {
+    type: string
+    primary_key: yes
+    hidden: yes
+    sql: CONCAT(${printbatch_id},${printbatchdetail_num}) ;;
+  }
+
+
   dimension: comments {
     type: string
     sql: ${TABLE}.comments ;;

@@ -74,6 +74,7 @@ view: print_batch {
 
   dimension: printbatch_id {
     type: number
+    primary_key: yes
     hidden: yes
     sql: ${TABLE}.printbatch_id ;;
   }
@@ -111,6 +112,15 @@ view: print_batch {
     sql: ${TABLE}.users_id ;;
   }
 
+  dimension: date_diff {
+    type:  number
+    sql: datediff(d,${TABLE}.batch_date,${TABLE}.end_date) ;;
+  }
+
+  dimension: delay {
+    type: string
+    sql: case when ${date_diff} > 1 then 'True' else 'False' end ;;
+  }
   measure: count {
     type: count
     drill_fields: [customer.customer_id, customer.customer_name, users.users_id, users.first_name, users.last_name]

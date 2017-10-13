@@ -137,7 +137,6 @@ explore: customer_service_level_agreement {
   view_label: "Print Batch Detail"
   type: inner
   sql_on: ${print_batch.printbatch_id} = ${print_batch_detail.printbatch_id} ;;
-  #sql_on: ${print_batch_detail.users_id} = ${users.users_id} ;;
   relationship: one_to_many
   }
   join: user_type {
