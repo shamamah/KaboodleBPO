@@ -120,6 +120,14 @@ explore: customer_service_level_agreement {
     and ${print_batch.servicejobtype_id} = ${customer_service_job.servicejobtype_id};;
     relationship: many_to_one
 }
+  join: v_print_batch_delayed {
+    view_label: "Print Batch"
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${v_print_batch_delayed.batch_id} = ${print_batch.printbatch_id}
+    and ${v_print_batch_delayed.customer_id} = ${print_batch.customer_id}
+    and ${v_print_batch_delayed.service_job_type_id} = ${print_batch.servicejobtype_id};;
+  }
   join: users {
     view_label: "Print Batch"
     type: inner

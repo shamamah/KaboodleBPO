@@ -112,10 +112,10 @@ view: print_batch_detail {
   }
 
 
-  measure: Print_Batch_Detail_count {
-    type: count
-    drill_fields: [users.users_id, users.first_name, users.last_name]
-  }
+#  measure: Print_Batch_Detail_count {
+#    type: count
+#    drill_fields: [users.users_id, users.first_name, users.last_name]
+#  }
 
   measure: sum_batch_detail_count {
     type: sum

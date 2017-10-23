@@ -121,8 +121,8 @@ view: print_batch {
     type: string
     sql: case when ${date_diff} > 1 then 'True' else 'False' end ;;
   }
-  measure: count {
-    type: count
-    drill_fields: [customer.customer_id, customer.customer_name, users.users_id, users.first_name, users.last_name]
-  }
+#  measure: count {
+#    type: count
+#    drill_fields: [customer.customer_id, customer.customer_name, users.users_id, users.first_name, users.last_name]
+# }
 }
