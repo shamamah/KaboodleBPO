@@ -113,6 +113,16 @@ explore: customer_service_level_agreement {
     sql_on: ${customer_service_job.servicejobtype_id} = ${service_job_type.servicejobtype_id} ;;
     relationship: many_to_one
   }
+  join: sla {
+    view_label: "Customer SLA"
+    type: inner
+    sql_on:  ${sla.customer_id} = ${customer.customer_id}
+    and ${sla.service_job_type_id} = ${service_job_type.servicejobtype_id}
+    and ${sla.customer_service_job_id} =  ${customer_service_level_agreement.customerservicejob_id}
+    and ${sla.service_type_id} = ${service_type.servicetype_id} ;;
+    relationship: many_to_one
+  }
+
   join: print_batch {
     view_label: "Print Batch"
     type: inner
