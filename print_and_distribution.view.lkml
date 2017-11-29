@@ -38,6 +38,7 @@ view: sla {
     sql: ${TABLE}.pass_count ;;
   }
   measure: aggregate_pass_count {
+    label: "Pass Count"
     type: sum
     sql: ${pass_count} ;;
   }
@@ -49,6 +50,7 @@ view: sla {
   }
 
   measure: aggregate_fail_count {
+    label: "Fail Count"
     type: sum
     sql: ${fail_count} ;;
   }
@@ -60,6 +62,7 @@ view: sla {
   }
 
   measure: aggregate_total_count {
+    label: "Total Count"
     type: sum
     sql: ${total_count} ;;
   }
