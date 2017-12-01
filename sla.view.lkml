@@ -1,4 +1,4 @@
-view: sla2 {
+view: sla {
   sql_table_name: report.Sla ;;
 
   dimension: sla_id {

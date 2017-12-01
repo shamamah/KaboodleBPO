@@ -1,4 +1,4 @@
-view: sla {
+view: print_and_distribution {
   sql_table_name: rpt.sla ;;
 
   dimension: sla_id {

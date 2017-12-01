@@ -43,6 +43,12 @@ view: service_job_type {
     sql: ${TABLE}.servicejobtype_id ;;
   }
 
+  dimension: slagrouptype_id {
+    type: number
+    hidden: yes
+    sql: ${TABLE}.slagrouptype_id ;;
+  }
+
   measure: count {
     type: count
     hidden: yes
