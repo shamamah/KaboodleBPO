@@ -87,6 +87,7 @@ view: print_and_distribution {
 
   measure: aggregate_sla_expected {
     type:  max
+    label: "SLA Expected"
     sql: ${sla_expected} ;;
   }
 
