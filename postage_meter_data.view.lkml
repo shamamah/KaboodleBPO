@@ -42,9 +42,10 @@ view: postage_meter_data {
   }
 
   measure: aggregate_postage_used {
-    label: "Used Postage"
+    label: "Postage Used"
     type: sum
     sql: ${postage_used} ;;
+    value_format: "$#,##0.00"
   }
 
   dimension: pieces {
@@ -54,9 +55,10 @@ view: postage_meter_data {
   }
 
   measure:  aggregate_pieces {
-    label: "aggregate_pieces"
+    label: "Pieces"
     type: sum
     sql: ${pieces} ;;
+    value_format: "#,##0"
   }
 
   measure: count {
