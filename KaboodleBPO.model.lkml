@@ -44,3 +44,38 @@ explore: print_and_distribution {
 
   }
 }
+
+explore: postage_meter_data {
+
+  label: "Postage Meter"
+
+  access_filter: {
+    field:customer.customer_name
+    user_attribute:company_name
+  }
+  persist_for: "4 hours"
+
+  join: meter_account {
+    type: inner
+    sql_on: ${postage_meter_data.meteraccount_id} = ${meter_account.meteraccount_id} ;;
+    relationship: many_to_one
+  }
+
+  join: customer {
+    type: inner
+    sql_on: ${meter_account.customer_id} = ${customer.customer_id} ;;
+    relationship: many_to_one
+  }
+
+  join: mail_class_type {
+    type: inner
+    sql_on: ${postage_meter_data.mailclasstype_id} = ${mail_class_type.mailclasstype_id} ;;
+    relationship: many_to_one
+  }
+
+  join: sla_group_type {
+    type: inner
+    sql_on: ${meter_account.meteraccount_id} = ${sla_group_type.slagrouptype_id} ;;
+    relationship: many_to_one
+  }
+}
