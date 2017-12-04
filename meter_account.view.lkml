@@ -30,6 +30,7 @@ view: meter_account {
 
   dimension: meteraccount_code {
     type: number
+    hidden: yes
     sql: ${TABLE}.meteraccount_code ;;
   }
 
@@ -41,6 +42,7 @@ view: meter_account {
 
   dimension: slagrouptype_id {
     type: number
+    hidden: yes
     sql: ${TABLE}.slagrouptype_id ;;
   }
 
