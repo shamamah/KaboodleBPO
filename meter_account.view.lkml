@@ -39,6 +39,11 @@ view: meter_account {
     sql: ${TABLE}.meteraccount_id ;;
   }
 
+  dimension: slagrouptype_id {
+    type: number
+    sql: ${TABLE}.slagrouptype_id ;;
+  }
+
   dimension_group: pcadded {
     type: time
     timeframes: [

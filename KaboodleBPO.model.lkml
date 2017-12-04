@@ -45,6 +45,7 @@ explore: print_and_distribution {
   }
 }
 
+
 explore: postage_meter_data {
 
   label: "Postage Meter"
@@ -75,7 +76,7 @@ explore: postage_meter_data {
 
   join: sla_group_type {
     type: inner
-    sql_on: ${meter_account.meteraccount_id} = ${sla_group_type.slagrouptype_id} ;;
+    sql_on: ${meter_account.slagrouptype_id} = ${sla_group_type.slagrouptype_id} ;;
     relationship: many_to_one
   }
 }
