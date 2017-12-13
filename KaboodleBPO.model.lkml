@@ -1,13 +1,13 @@
+label: "Kaboodle BPO"
 connection: "bpo"
 
-# include all the views
 include: "*.view"
-
-
-# include all the dashboards
 include: "*.dashboard"
 
-# table CustomerServiceLevelAgreement; linked to tables IntervalType, CustomerServiceJob, CustomerService, Customer, ServiceType, ServiceJobType (Verified)
+fiscal_month_offset: 0
+persist_for: "30 minutes"
+
+
 explore: print_and_distribution {
 
   label: "Actual vs SLA"
