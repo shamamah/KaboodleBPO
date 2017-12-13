@@ -9,8 +9,9 @@ persist_for: "30 minutes"
 
 
 explore: print_and_distribution {
-
+  description: "BPO's print and distribution operations, to gauge turnaround out of print and mailing of batches in comparison to customer's SLA"
   label: "Actual vs SLA"
+  group_label: "BPO: Print & Distribution"
 
   access_filter: {
     field:customer.customer_name
@@ -47,8 +48,9 @@ explore: print_and_distribution {
 
 
 explore: postage_meter_data {
-
+  description: "BPO's postage usage measure"
   label: "Postage Meter"
+  group_label: "BPO: Print & Distribution"
 
   access_filter: {
     field:customer.customer_name
