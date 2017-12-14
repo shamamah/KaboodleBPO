@@ -10,7 +10,9 @@ include: "*.dashboard"
 # table CustomerServiceLevelAgreement; linked to tables IntervalType, CustomerServiceJob, CustomerService, Customer, ServiceType, ServiceJobType (Verified)
 explore: print_and_distribution {
 
-  label: "Actual vs SLA"
+  label: "OLD: Actual vs SLA"
+  group_label: "OLD: To Be Removed"
+  hidden: yes
 
   access_filter: {
     field:customer.customer_name
@@ -48,7 +50,9 @@ explore: print_and_distribution {
 
 explore: postage_meter_data {
 
-  label: "Postage Meter"
+  label: "OLD: Postage Meter"
+  group_label: "OLD: To Be Removed"
+  hidden: yes
 
   access_filter: {
     field:customer.customer_name

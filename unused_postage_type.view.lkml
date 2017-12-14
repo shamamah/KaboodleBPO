@@ -1,8 +1,7 @@
-view: service_job_type {
-  sql_table_name: dbo.ServiceJobType ;;
+view: unused_postage_type {
+  sql_table_name: dbo.UnusedPostageType ;;
 
   dimension: dscr {
-    label: "Service Job Description"
     type: string
     sql: ${TABLE}.dscr ;;
   }
@@ -18,7 +17,6 @@ view: service_job_type {
       quarter,
       year
     ]
-    hidden: yes
     sql: ${TABLE}.last_modified_date ;;
   }
 
@@ -33,25 +31,16 @@ view: service_job_type {
       quarter,
       year
     ]
-    hidden: yes
     sql: ${TABLE}.pcadded_date ;;
   }
 
-  dimension: servicejobtype_id {
+  dimension: unusedpostagetype_id {
     type: number
-    hidden: yes
-    sql: ${TABLE}.servicejobtype_id ;;
-  }
-
-  dimension: slagrouptype_id {
-    type: number
-    hidden: yes
-    sql: ${TABLE}.slagrouptype_id ;;
+    sql: ${TABLE}.unusedpostagetype_id ;;
   }
 
   measure: count {
     type: count
-    hidden: yes
     drill_fields: []
   }
 }

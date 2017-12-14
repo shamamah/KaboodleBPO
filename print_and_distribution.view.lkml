@@ -37,6 +37,7 @@ view: print_and_distribution {
     hidden:  yes
     sql: ${TABLE}.pass_count ;;
   }
+
   measure: aggregate_pass_count {
     label: "Pass Count"
     type: sum

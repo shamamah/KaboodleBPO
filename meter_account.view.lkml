@@ -1,4 +1,5 @@
 view: meter_account {
+  label: "Meter Accounts"
   sql_table_name: dbo.MeterAccount ;;
 
   dimension: customer_id {
@@ -9,7 +10,7 @@ view: meter_account {
 
   dimension: dscr {
     type: string
-    label: "Description"
+    label: "Meter Account Description"
     sql: ${TABLE}.dscr ;;
   }
 

@@ -25,6 +25,7 @@ view: customer {
 
   dimension: customer_name {
     type: string
+    label: "Company Name"
     sql: ${TABLE}.customer_name ;;
   }
 

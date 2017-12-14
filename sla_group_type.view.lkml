@@ -4,7 +4,7 @@ view: sla_group_type {
 
     dimension: dscr {
       type: string
-      label: "SLA Group Type Description"
+      label: "Service Group Description"
       sql: ${TABLE}.dscr ;;
     }
 

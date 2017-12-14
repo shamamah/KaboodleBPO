@@ -16,14 +16,7 @@ view: postage_meter_data {
 
   dimension_group: meter_date {
     type: time
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
+    timeframes: [week,month,quarter,year]
     convert_tz: no
     datatype: date
     sql: ${TABLE}.meter_date ;;

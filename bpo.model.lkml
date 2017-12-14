@@ -67,7 +67,9 @@ include: "*.dashboard"
 
 # table CustomerServiceLevelAgreement; linked to tables IntervalType, CustomerServiceJob, CustomerService, Customer, ServiceType, ServiceJobType (Verified)
 explore: customer_service_level_agreement {
-    access_filter: {
+  group_label: "OLD: To Be Removed"
+  hidden: yes
+  access_filter: {
     field:customer.customer_name
     user_attribute:customer
   }
@@ -219,6 +221,8 @@ explore: customer_service_level_agreement {
 
 # table: MeterData; Linked to tables MailClassType, MeterAccount, Customer (Verified)
 explore: meter_data {
+  group_label: "OLD: To Be Removed"
+  hidden: yes
   join: mail_class_type {
     type: inner
     sql_on: ${meter_data.mailclasstype_id} = ${mail_class_type.mailclasstype_id} ;;

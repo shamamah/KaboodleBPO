@@ -53,6 +53,7 @@ view: sla {
 
   dimension: sla_actual {
     type: number
+    label: "SLA"
     sql: ${TABLE}.SLA_Actual ;;
   }
 
