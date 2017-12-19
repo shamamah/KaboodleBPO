@@ -29,7 +29,7 @@ view: postage_meter_data {
   }
 
   dimension: postage_used {
-    type: string
+    type: number
     hidden: yes
     sql: ${TABLE}.postage_used ;;
   }

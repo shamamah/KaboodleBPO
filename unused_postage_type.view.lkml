@@ -1,6 +1,12 @@
 view: unused_postage_type {
   sql_table_name: dbo.UnusedPostageType ;;
 
+  dimension: unusedpostagetype_id {
+    type: number
+    hidden: yes
+    sql: ${TABLE}.unusedpostagetype_id ;;
+  }
+
   dimension: dscr {
     type: string
     sql: ${TABLE}.dscr ;;
@@ -8,6 +14,7 @@ view: unused_postage_type {
 
   dimension_group: last_modified {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -22,6 +29,7 @@ view: unused_postage_type {
 
   dimension_group: pcadded {
     type: time
+    hidden: yes
     timeframes: [
       raw,
       time,
@@ -34,13 +42,9 @@ view: unused_postage_type {
     sql: ${TABLE}.pcadded_date ;;
   }
 
-  dimension: unusedpostagetype_id {
-    type: number
-    sql: ${TABLE}.unusedpostagetype_id ;;
-  }
-
   measure: count {
     type: count
+    hidden: yes
     drill_fields: []
   }
 }

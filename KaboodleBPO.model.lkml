@@ -128,4 +128,26 @@ explore: postage_meter_data {
     #foreign_key:
     sql_on: ${meter_account.slagrouptype_id} = ${sla_group_type.slagrouptype_id} ;;
   }
+
+  join: unused_postage {
+    type: inner
+    relationship: many_to_many
+    from: unused_postage
+    sql_table_name: dbo.UnusedPostage ;;
+    view_label: "Unused Postage"
+    #required_joins: []
+    #foreign_key:
+    sql_on: ${postage_meter_data.meteraccount_id} = ${unused_postage.meteraccount_id} ;;
+  }
+
+  join: unused_postage_type {
+    type: inner
+    relationship: many_to_one
+    from: unused_postage_type
+    sql_table_name: dbo.unused_postage_type ;;
+    view_label: "Unused Postage Type"
+    #required_joins: []
+    #foreign_key:
+    sql_on: ${unused_postage.unusedpostagetype_id} = ${unused_postage_type.unusedpostagetype_id} ;;
+  }
 }
