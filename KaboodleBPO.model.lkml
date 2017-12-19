@@ -142,7 +142,7 @@ explore: postage_data {
     view_label: "Unused Postage"
     #required_joins: []
     #foreign_key:
-    sql_on: ${postage_data.meteraccount_id} = ${unused_postage.meteraccount_id} ;;
+    sql_on: ${postage_data.meteraccount_id} = ${unused_postage.meteraccount_id} and ${meter_account.slagrouptype_id} = ${sla_group_type.slagrouptype_id} ;;
   }
 
   join: unused_postage_type {
