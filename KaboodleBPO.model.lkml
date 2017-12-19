@@ -84,6 +84,7 @@ explore: postage_data {
   from: postage_data
   view_name: postage_data
   sql_table_name: dbo.MeterData ;;
+  sql_always_where: "${unused_postage_type.unusedpostagetype_id} <> 11" ;;
 
   access_filter: {
     field:customer.customer_name
