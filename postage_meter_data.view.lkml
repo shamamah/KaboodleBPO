@@ -35,7 +35,7 @@ view: postage_data {
   }
 
   measure: aggregate_postage_used {
-    label: "Postage Used"
+    label: "Stamp Amount"
     type: sum
     sql: ${postage_used} ;;
     value_format: "$#,##0.00"

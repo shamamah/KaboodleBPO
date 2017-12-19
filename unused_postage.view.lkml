@@ -50,7 +50,7 @@ view: unused_postage {
   }
 
   measure: aggregate_count {
-    label: "Pieces"
+    label: "Reversed Pieces"
     type: sum
     sql: ${count} ;;
   }
@@ -62,7 +62,7 @@ view: unused_postage {
   }
 
   measure: aggregate_stamp_amount {
-    label: "Stamp Amount"
+    label: "Reversed Stamp Amount"
     type: sum
     sql: ${stamp_amount} ;;
   }
