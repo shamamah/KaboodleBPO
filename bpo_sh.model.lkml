@@ -48,7 +48,7 @@ explore: print_and_distribution {
 }
 
 
-explore: postage_meter_data {
+explore: postage_data {
 
   label: "OLD: Postage Meter"
   group_label: "OLD: To Be Removed"
@@ -62,7 +62,7 @@ explore: postage_meter_data {
 
   join: meter_account {
     type: inner
-    sql_on: ${postage_meter_data.meteraccount_id} = ${meter_account.meteraccount_id} ;;
+    sql_on: ${postage_data.meteraccount_id} = ${meter_account.meteraccount_id} ;;
     relationship: many_to_one
   }
 
@@ -74,7 +74,7 @@ explore: postage_meter_data {
 
   join: mail_class_type {
     type: inner
-    sql_on: ${postage_meter_data.mailclasstype_id} = ${mail_class_type.mailclasstype_id} ;;
+    sql_on: ${postage_data.mailclasstype_id} = ${mail_class_type.mailclasstype_id} ;;
     relationship: many_to_one
   }
 

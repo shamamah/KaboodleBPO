@@ -9,6 +9,7 @@ view: unused_postage_type {
 
   dimension: dscr {
     type: string
+    label: "Unused Postage Reason"
     sql: ${TABLE}.dscr ;;
   }
 

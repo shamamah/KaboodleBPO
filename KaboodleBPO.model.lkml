@@ -75,14 +75,14 @@ explore: print_and_distribution {
 }
 
 
-explore: postage_meter_data {
+explore: postage_data {
   description: "BPO's postage usage measure"
   label: "Postage Meter"
   group_label: "BPO: Print & Distribution"
   view_label: "Postage Usage"
   persist_for: "4 hours"
-  from: postage_meter_data
-  view_name: postage_meter_data
+  from: postage_data
+  view_name: postage_data
   sql_table_name: dbo.MeterData ;;
 
   access_filter: {
@@ -92,8 +92,13 @@ explore: postage_meter_data {
 
   join: meter_account {
     type: inner
-    sql_on: ${postage_meter_data.meteraccount_id} = ${meter_account.meteraccount_id} ;;
     relationship: many_to_one
+    from: "meter_account"
+    sql_table_name: dbo.MeterAccount ;;
+    view_label: "Postage Meter Account"
+    #required_joins: []
+    #foreign_key:
+    sql_on: ${postage_data.meteraccount_id} = ${meter_account.meteraccount_id} ;;
   }
 
   join: customer {
@@ -115,7 +120,7 @@ explore: postage_meter_data {
     view_label: "Mailing Classes"
     #required_joins: []
     #foreign_key:
-    sql_on: ${postage_meter_data.mailclasstype_id} = ${mail_class_type.mailclasstype_id} ;;
+    sql_on: ${postage_data.mailclasstype_id} = ${mail_class_type.mailclasstype_id} ;;
   }
 
   join: sla_group_type {
@@ -137,7 +142,7 @@ explore: postage_meter_data {
     view_label: "Unused Postage"
     #required_joins: []
     #foreign_key:
-    sql_on: ${postage_meter_data.meteraccount_id} = ${unused_postage.meteraccount_id} ;;
+    sql_on: ${postage_data.meteraccount_id} = ${unused_postage.meteraccount_id} ;;
   }
 
   join: unused_postage_type {

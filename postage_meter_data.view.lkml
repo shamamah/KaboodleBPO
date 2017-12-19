@@ -1,7 +1,7 @@
-view: postage_meter_data {
+view: postage_data {
   sql_table_name: dbo.MeterData ;;
 
-  dimension: meterdate_id {
+  dimension: meterdata_id {
     primary_key: yes
     type: number
     hidden: yes
@@ -16,7 +16,7 @@ view: postage_meter_data {
 
   dimension_group: meter_date {
     type: time
-    timeframes: [week,month,quarter,year]
+    timeframes: [month,quarter,year]
     convert_tz: no
     datatype: date
     sql: ${TABLE}.meter_date ;;
@@ -47,7 +47,7 @@ view: postage_meter_data {
     sql: ${TABLE}.pieces ;;
   }
 
-  measure:  aggregate_pieces {
+  measure: aggregate_pieces {
     label: "Pieces"
     type: sum
     sql: ${pieces} ;;

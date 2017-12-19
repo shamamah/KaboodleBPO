@@ -14,28 +14,14 @@ view: meter_account {
     sql: ${TABLE}.dscr ;;
   }
 
-  dimension_group: last_modified {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    hidden: yes
-    sql: ${TABLE}.last_modified_date ;;
-  }
-
   dimension: meteraccount_code {
     type: number
-    hidden: yes
+    label: "Meter Account Code"
     sql: ${TABLE}.meteraccount_code ;;
   }
 
   dimension: meteraccount_id {
+    primary_key: yes
     type: number
     hidden: yes
     sql: ${TABLE}.meteraccount_id ;;
@@ -47,23 +33,9 @@ view: meter_account {
     sql: ${TABLE}.slagrouptype_id ;;
   }
 
-  dimension_group: pcadded {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    hidden: yes
-    sql: ${TABLE}.pcadded_date ;;
-  }
-
   measure: count {
     type: count
+    hidden: yes
     drill_fields: [customer.customer_id, customer.customer_name]
   }
 }

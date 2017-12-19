@@ -1,23 +1,18 @@
 view: unused_postage {
-  label: "unused_postage"
+  label: "Unused Postage"
   sql_table_name: dbo.UnusedPostage ;;
 
-  dimension: comments {
-    type: string
-    hidden: yes
-    sql: ${TABLE}.comments ;;
-  }
-
-  dimension: pieces {
+  dimension: unusedpostage_id {
+    primary_key: yes
     type: number
     hidden: yes
-    sql: ${TABLE}.count ;;
+    sql: ${TABLE}.unusedpostage_id ;;
   }
 
-  measure: aggregate_unused_postage_count {
-    label: "Pieces"
-    type: sum
-    sql: ${pieces} ;;
+  dimension: unusedpostagetype_id {
+    type: number
+    hidden: yes
+    sql: ${TABLE}.unusedpostagetype_id ;;
   }
 
   dimension: customer_id {
@@ -26,22 +21,14 @@ view: unused_postage {
     sql: ${TABLE}.customer_id ;;
   }
 
-  dimension_group: last_modified {
-    type: time
+  dimension: meteraccount_id {
+    type: number
     hidden: yes
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.last_modified_date ;;
+    sql: ${TABLE}.meteraccount_id ;;
   }
 
   dimension_group: meter_date {
+    label: "Meter Stamp Date"
     type: time
     timeframes: [
       raw,
@@ -56,31 +43,16 @@ view: unused_postage {
     sql: ${TABLE}.meter_date ;;
   }
 
-  dimension: meteraccount_id {
+  dimension: count {
     type: number
     hidden: yes
-    sql: ${TABLE}.meteraccount_id ;;
+    sql: ${TABLE}.count ;;
   }
 
-  dimension_group: pcadded {
-    type: time
-    hidden: yes
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.pcadded_date ;;
-  }
-
-  dimension: printbatch_id {
-    type: number
-    hidden: yes
-    sql: ${TABLE}.printbatch_id ;;
+  measure: aggregate_count {
+    label: "Pieces"
+    type: sum
+    sql: ${count} ;;
   }
 
   dimension: stamp_amount {
@@ -94,17 +66,4 @@ view: unused_postage {
     type: sum
     sql: ${stamp_amount} ;;
   }
-
-  dimension: unusedpostage_id {
-    type: number
-    hidden: yes
-    sql: ${TABLE}.unusedpostage_id ;;
-  }
-
-  dimension: unusedpostagetype_id {
-    type: number
-    hidden: yes
-    sql: ${TABLE}.unusedpostagetype_id ;;
-  }
-
 }
