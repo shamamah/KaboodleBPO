@@ -1,4 +1,5 @@
 view: unused_postage_type {
+  label: "Reverse Postage Reasons"
   sql_table_name: dbo.UnusedPostageType ;;
 
   dimension: unusedpostagetype_id {
@@ -9,38 +10,8 @@ view: unused_postage_type {
 
   dimension: dscr {
     type: string
-    label: "Unused Postage Reason"
+    label: "Reversed Postage Reason"
     sql: ${TABLE}.dscr ;;
-  }
-
-  dimension_group: last_modified {
-    type: time
-    hidden: yes
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.last_modified_date ;;
-  }
-
-  dimension_group: pcadded {
-    type: time
-    hidden: yes
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.pcadded_date ;;
   }
 
   measure: count {
