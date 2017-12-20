@@ -146,14 +146,14 @@ explore: postage_data {
     sql_where: ${unused_postage.unusedpostagetype_id} <> 11 ;;
   }
 
-  join: unused_postage_type {
-    type: inner
-    relationship: many_to_one
-    from: unused_postage_type
-    sql_table_name: dbo.UnusedPostageType ;;
-    view_label: "Unused Postage Type"
-    #required_joins: []
-    #foreign_key:
-    sql_on: ${unused_postage.unusedpostagetype_id} = ${unused_postage_type.unusedpostagetype_id} ;;
-  }
+  #join: unused_postage_type {
+  #  type: inner
+  #  relationship: many_to_one
+  #  from: unused_postage_type
+  #  sql_table_name: dbo.UnusedPostageType ;;
+  #  view_label: "Unused Postage Type"
+  #  #required_joins: []
+  #  #foreign_key:
+  #  sql_on: ${unused_postage.unusedpostagetype_id} = ${unused_postage_type.unusedpostagetype_id} ;;
+  #}
 }
