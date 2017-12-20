@@ -143,7 +143,7 @@ explore: postage_data {
     #required_joins: []
     #foreign_key:
     sql_on: ${postage_data.meteraccount_id} = ${unused_postage.meteraccount_id} and ${meter_account.slagrouptype_id} = ${sla_group_type.slagrouptype_id} ;;
-    sql_where: "${unused_postage_type.unusedpostagetype_id} <> 11" ;;
+    sql_where: ${unused_postage.unusedpostagetype_id} <> 11 ;;
   }
 
   join: unused_postage_type {
