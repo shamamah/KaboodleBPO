@@ -1,5 +1,6 @@
 view: postage_data {
   sql_table_name: dbo.MeterData ;;
+  label: "Metered"
 
   dimension: meterdata_id {
     primary_key: yes
@@ -35,10 +36,10 @@ view: postage_data {
   }
 
   measure: aggregate_postage_used {
-    label: "Metered Postage Amount"
+    label: "Postage Amount"
     type: sum
     sql: ${postage_used} ;;
-    value_format: "$#,##0.00"
+    value_format: "$#,##0.000"
   }
 
   dimension: pieces {
@@ -48,7 +49,7 @@ view: postage_data {
   }
 
   measure: aggregate_pieces {
-    label: "Metered Pieces"
+    label: "Pieces"
     type: sum
     sql: ${pieces} ;;
     value_format: "#,##0"
