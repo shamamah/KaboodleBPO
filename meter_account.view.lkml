@@ -10,13 +10,13 @@ view: meter_account {
 
   dimension: dscr {
     type: string
-    label: "Meter Account Description"
+    label: "Meter Description"
     sql: ${TABLE}.dscr ;;
   }
 
   dimension: meteraccount_code {
     type: number
-    label: "Meter Account Code"
+    label: "Meter Account"
     sql: ${TABLE}.meteraccount_code ;;
   }
 

@@ -72,6 +72,13 @@ explore: print_and_distribution {
     #foreign_key:
     sql_on: ${service_job_type.slagrouptype_id} = ${sla_group_type.slagrouptype_id};;
   }
+
+  join: aaa {
+    type: inner
+    relationship: many_to_one
+    view_label: "Cohort"
+    sql_on: ${print_and_distribution.service_job_type_id} = ${aaa.servicejobtype_id} ;;
+  }
 }
 
 
