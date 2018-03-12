@@ -5,7 +5,7 @@ include: "*.view"
 
 
 # include all the dashboards
-include: "*.dashboard"
+#include: "*.dashboard"
 
 
 # table Customer; No linked tables (Verified)

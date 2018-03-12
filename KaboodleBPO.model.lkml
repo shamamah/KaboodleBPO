@@ -73,11 +73,13 @@ explore: print_and_distribution {
     sql_on: ${service_job_type.slagrouptype_id} = ${sla_group_type.slagrouptype_id};;
   }
 
-  join: aaa {
+  join: total_print_counts {
     type: inner
     relationship: many_to_one
     view_label: "Cohort"
-    sql_on: ${print_and_distribution.service_job_type_id} = ${aaa.servicejobtype_id} ;;
+    sql_on: ${print_and_distribution.service_job_type_id} = ${total_print_counts.servicejobtype_id} and
+            ${print_and_distribution.sla_month_month} = ${total_print_counts.sla_month_month} and
+            ${print_and_distribution.sla_month_year} = ${total_print_counts.sla_month_year};;
   }
 }
 

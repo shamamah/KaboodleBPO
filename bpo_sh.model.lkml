@@ -5,7 +5,7 @@ include: "*.view"
 
 
 # include all the dashboards
-include: "*.dashboard"
+#include: "*.dashboard"
 
 # table CustomerServiceLevelAgreement; linked to tables IntervalType, CustomerServiceJob, CustomerService, Customer, ServiceType, ServiceJobType (Verified)
 explore: print_and_distribution {
