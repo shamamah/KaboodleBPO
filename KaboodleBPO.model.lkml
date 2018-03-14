@@ -166,3 +166,49 @@ explore: postage_data {
   #  sql_on: ${unused_postage.unusedpostagetype_id} = ${unused_postage_type.unusedpostagetype_id} ;;
   #}
 }
+
+
+explore: phone_log {
+  description: "BPO's Customer Service Performance"
+  label: "Customer Service (Phone/Chat)"
+  group_label: "BPO: Customer Service"
+  view_label: "Phone Log"
+  hidden: no
+
+  #sql_always_where: ${service_type.servicetype_id}=4 ;;    #servicetype_id = 4 is for "Customer Support as in the table"
+  persist_for: "1 hours"
+  from: phone_log
+  view_name: phone_log
+  sql_table_name: pho.PhoneLog ;;
+
+  #fields: []
+  #always_filter: {}
+  #always_join: []
+
+  join: channel_type {
+    type: inner
+    relationship: many_to_one
+    from: "channel_type"
+    sql_table_name: pho.ChannelType ;;
+    view_label: "Channel"
+    sql_on: ${phone_log.channeltype_id} = ${channel_type.channeltype_id} ;;
+  }
+
+  join: media_type {
+    type: inner
+    relationship: many_to_one
+    from: "media_type"
+    sql_table_name: pho.MediaType ;;
+    view_label: "Media"
+    sql_on: ${phone_log.mediatype_id} = ${media_type.mediatype_id} ;;
+  }
+
+  join: customer {
+    type: inner
+    relationship: many_to_one
+    from: "customer"
+    sql_table_name: dbo.customer ;;
+    view_label: "Customer"
+    sql_on: ${channel_type.customer_id} = ${customer.customer_id} ;;
+  }
+}

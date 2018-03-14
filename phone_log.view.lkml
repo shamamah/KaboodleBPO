@@ -13,6 +13,7 @@ view: phone_log {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.abandon_time ;;
   }
 
@@ -28,6 +29,7 @@ view: phone_log {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.accept_time ;;
   }
 
@@ -61,6 +63,7 @@ view: phone_log {
       quarter,
       year
     ]
+    hidden: yes
     sql: ${TABLE}.create_time ;;
   }
 
@@ -111,6 +114,7 @@ view: phone_log {
 
   dimension: origination_number {
     type: string
+    hidden: yes
     label: "Caller ID"
     sql: ${TABLE}.origination_number ;;
   }
@@ -202,16 +206,76 @@ view: phone_log {
     sql: ${TABLE}.users_id ;;
   }
 
-  measure: count {
+  measure: CallCount {
     type: count
-    hidden: yes
-    drill_fields: []
+    label: "Incoming Calls"
+    #drill_fields: []
+  }
+
+  dimension: filter_accepted_calls {
+    type: date
+    sql: CASE WHEN ${accept_time} < '1900/01/01' THEN NULL
+         ELSE ${accept_date}
+        END ;;
+  }
+
+  measure: count_accepted_calls {
+    type: count
+    label: "Answered Calls"
+    filters: {
+      field: filter_accepted_calls
+      value: "-NULL"
+    }
+  }
+
+  measure: count_abandoned_calls {
+    type: count
+    label: "Abandoned Calls"
+    filters: {
+      field: filter_accepted_calls
+      value: "NULL"
+    }
+  }
+
+  #CASE WHEN (accept_time = '1800-01-01 00:00:00.000') THEN NULL ELSE datediff(s, pl.create_time, pl.accept_time) END as OnHoldBeforeAnswer_Seconds
+  dimension: filter_queue_wi30_before_answer {
+    type: date
+    sql: CASE WHEN (${accept_time} > '1900/01/01' AND datediff(s, ${create_time}, ${accept_time}) <= 30)
+        THEN datediff(s, ${create_time}, ${accept_time})
+        ELSE NULL
+      END ;;
+  }
+
+  measure: count_answered_calls_wi30 {
+    type: count
+    label: "Answered Calls w/i 30 sec"
+    filters: {
+      field: filter_queue_wi30_before_answer
+      value: "-NULL"
+    }
   }
 
   measure: TalkTime {
     #(transaction_processing_time * POWER(10.00000000000,-7))
-    type: number
-    sql:  $(transaction_processing_time * 0.00000001) ;;
-    value_format: "0."
+    type: sum
+    label: "Talk Time"
+    sql:  (${transaction_processing_time} * 0.0000001) ;;
+    value_format: "0"
+  }
+
+  measure: PostProcessingTime {
+    #(transaction_processing_time * POWER(10.00000000000,-7))
+    type: sum
+    label: "Post Processing Time"
+    sql:  (${post_processing_time} * 0.0000001) ;;
+    value_format: "0"
+  }
+
+  measure: TotalTime {
+    #(transaction_processing_time * POWER(10.00000000000,-7))
+    type: sum
+    label: "Total Time (Incl PP)"
+    sql:  (${total_time} * 0.0000001) ;;
+    value_format: "0"
   }
 }
