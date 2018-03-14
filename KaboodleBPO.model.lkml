@@ -203,6 +203,15 @@ explore: phone_log {
     sql_on: ${phone_log.mediatype_id} = ${media_type.mediatype_id} ;;
   }
 
+  join: queue_type {
+    type: inner
+    relationship: many_to_one
+    from: "queue_type"
+    sql_table_name: pho.QueueType ;;
+    view_label: "Queue"
+    sql_on: ${phone_log.queuetype_id} = ${queue_type.queuetype_id} ;;
+  }
+
   join: customer {
     type: inner
     relationship: many_to_one

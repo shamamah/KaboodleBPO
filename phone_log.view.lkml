@@ -53,7 +53,7 @@ view: phone_log {
 
   dimension_group: create {
     type: time
-    label: "Call Arrive Time"
+    label: "Call Arrival"
     timeframes: [
       raw,
       time,
@@ -63,7 +63,7 @@ view: phone_log {
       quarter,
       year
     ]
-    hidden: yes
+    hidden: no
     sql: ${TABLE}.create_time ;;
   }
 
@@ -214,6 +214,7 @@ view: phone_log {
 
   dimension: filter_accepted_calls {
     type: date
+    hidden: yes
     sql: CASE WHEN ${accept_time} < '1900/01/01' THEN NULL
          ELSE ${accept_date}
         END ;;
@@ -237,9 +238,9 @@ view: phone_log {
     }
   }
 
-  #CASE WHEN (accept_time = '1800-01-01 00:00:00.000') THEN NULL ELSE datediff(s, pl.create_time, pl.accept_time) END as OnHoldBeforeAnswer_Seconds
   dimension: filter_queue_wi30_before_answer {
     type: date
+    hidden: yes
     sql: CASE WHEN (${accept_time} > '1900/01/01' AND datediff(s, ${create_time}, ${accept_time}) <= 30)
         THEN datediff(s, ${create_time}, ${accept_time})
         ELSE NULL
@@ -278,4 +279,19 @@ view: phone_log {
     sql:  (${total_time} * 0.0000001) ;;
     value_format: "0"
   }
+
+  measure: PercentAnsweredWithin30Seconds {
+    type: number
+    label: "% Answered wi 30 seconds"
+    sql: ((${count_answered_calls_wi30} * 100.0) / ${count_accepted_calls}) ;;
+    value_format: "0.00\%"
+  }
+
+  measure: PercentAbandoned {
+    type: number
+    label: "% Abandoned"
+    sql: ((${count_abandoned_calls} * 100.0) / ${CallCount}) ;;
+    value_format: "0.00\%"
+  }
+
 }
