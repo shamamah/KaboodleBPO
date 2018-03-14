@@ -220,4 +220,14 @@ explore: phone_log {
     view_label: "Customer"
     sql_on: ${channel_type.customer_id} = ${customer.customer_id} ;;
   }
+
+  join: users {
+    type: inner
+    relationship: many_to_one
+    from: "users"
+    sql_table_name: dbo.users ;;
+    view_label: "Customer Service Representative"
+    sql_on: ${phone_log.users_id} = ${users.users_id} ;;
+    sql_where: ${phone_log.users_id} <> 0  ;;
+    }
 }

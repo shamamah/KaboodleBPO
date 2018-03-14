@@ -283,15 +283,29 @@ view: phone_log {
   measure: PercentAnsweredWithin30Seconds {
     type: number
     label: "% Answered wi 30 seconds"
-    sql: ((${count_answered_calls_wi30} * 100.0) / ${count_accepted_calls}) ;;
+    sql: case when (${count_accepted_calls} = 0) Then 0 Else ((${count_answered_calls_wi30} * 100.0) / ${count_accepted_calls}) End ;;
     value_format: "0.00\%"
   }
 
   measure: PercentAbandoned {
     type: number
     label: "% Abandoned"
-    sql: ((${count_abandoned_calls} * 100.0) / ${CallCount}) ;;
+    sql: case when (${CallCount} = 0) Then 0 Else ((${count_abandoned_calls} * 100.0) / ${CallCount}) End ;;
     value_format: "0.00\%"
   }
+
+measure: AverageTalkTime_sec {
+  type: number
+  label: "Ave Time (sec)"
+  sql: case when (${count_accepted_calls} = 0) Then 0 Else (${TotalTime} / ${count_accepted_calls}) End ;;
+  value_format: "0.0"
+}
+
+measure: AverageTalkTime_min {
+  type: number
+  label: "Ave Time (min)"
+  sql: case when (${count_accepted_calls} = 0) Then 0 Else ((${TotalTime} / 60.) / ${count_accepted_calls}) End ;;
+  value_format: "0.0"
+}
 
 }
