@@ -4,15 +4,7 @@ view: phone_log {
   dimension_group: abandon {
     type: time
     label: "Abandon Time"
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
+    timeframes: [raw,time,date,week,month,quarter,year]
     hidden: yes
     sql: ${TABLE}.abandon_time ;;
   }
@@ -20,15 +12,7 @@ view: phone_log {
   dimension_group: accept {
     type: time
     label: "Accept Time"
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
+    timeframes: [raw,time,date,week,month,quarter,year]
     hidden: yes
     sql: ${TABLE}.accept_time ;;
   }
@@ -54,15 +38,7 @@ view: phone_log {
   dimension_group: create {
     type: time
     label: "Call Arrival"
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
+    timeframes: [raw,time,date,week,month,quarter,year]
     hidden: no
     sql: ${TABLE}.create_time ;;
   }
@@ -93,15 +69,7 @@ view: phone_log {
 
   dimension_group: last_modified {
     type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
+    timeframes: [raw,time,date,week,month,quarter,year]
     hidden: yes
     sql: ${TABLE}.last_modified_date ;;
   }
@@ -121,15 +89,7 @@ view: phone_log {
 
   dimension_group: pcadded {
     type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
+    timeframes: [raw,time,date,week,month,quarter,year]
     hidden: yes
     sql: ${TABLE}.pcadded_date ;;
   }
@@ -208,8 +168,8 @@ view: phone_log {
 
   measure: CallCount {
     type: count
-    label: "Incoming Calls"
-    #drill_fields: []
+    label: "Calls/Chats Arrived"
+    drill_fields: [phonelog_id,transaction,create_time,accept_time]
   }
 
   dimension: filter_accepted_calls {
@@ -222,7 +182,7 @@ view: phone_log {
 
   measure: count_accepted_calls {
     type: count
-    label: "Answered Calls"
+    label: "Calls/Chats Answered"
     filters: {
       field: filter_accepted_calls
       value: "-NULL"
@@ -231,7 +191,7 @@ view: phone_log {
 
   measure: count_abandoned_calls {
     type: count
-    label: "Abandoned Calls"
+    label: "Calls/Chats Abandoned"
     filters: {
       field: filter_accepted_calls
       value: "NULL"
@@ -249,7 +209,7 @@ view: phone_log {
 
   measure: count_answered_calls_wi30 {
     type: count
-    label: "Answered Calls w/i 30 sec"
+    label: "Calls/Chats Answered within 30 sec"
     filters: {
       field: filter_queue_wi30_before_answer
       value: "-NULL"
@@ -259,7 +219,7 @@ view: phone_log {
   measure: TalkTime {
     #(transaction_processing_time * POWER(10.00000000000,-7))
     type: sum
-    label: "Talk Time"
+    label: "Talk/Chat Time (sec)"
     sql:  (${transaction_processing_time} * 0.0000001) ;;
     value_format: "0"
   }
@@ -267,43 +227,44 @@ view: phone_log {
   measure: PostProcessingTime {
     #(transaction_processing_time * POWER(10.00000000000,-7))
     type: sum
-    label: "Post Processing Time"
+    label: "Talk/Chat Post Processing Time"
     sql:  (${post_processing_time} * 0.0000001) ;;
     value_format: "0"
+    hidden: yes
   }
 
   measure: TotalTime {
     #(transaction_processing_time * POWER(10.00000000000,-7))
     type: sum
-    label: "Total Time (Incl PP)"
+    label: "Talk/Chat Time inc PP (sec)"
     sql:  (${total_time} * 0.0000001) ;;
     value_format: "0"
   }
 
   measure: PercentAnsweredWithin30Seconds {
     type: number
-    label: "% Answered wi 30 seconds"
+    label: "Calls/Chats Answered within 30 sec %"
     sql: case when (${count_accepted_calls} = 0) Then 0 Else ((${count_answered_calls_wi30} * 100.0) / ${count_accepted_calls}) End ;;
     value_format: "0.00\%"
   }
 
   measure: PercentAbandoned {
     type: number
-    label: "% Abandoned"
+    label: "Calls/Chats Abandoned %"
     sql: case when (${CallCount} = 0) Then 0 Else ((${count_abandoned_calls} * 100.0) / ${CallCount}) End ;;
     value_format: "0.00\%"
   }
 
 measure: AverageTalkTime_sec {
   type: number
-  label: "Ave Time (sec)"
+  label: "Talk/Chat Average Time (sec)"
   sql: case when (${count_accepted_calls} = 0) Then 0 Else (${TotalTime} / ${count_accepted_calls}) End ;;
   value_format: "0.0"
 }
 
 measure: AverageTalkTime_min {
   type: number
-  label: "Ave Time (min)"
+  label: "Talk/Chat Average Time (min)"
   sql: case when (${count_accepted_calls} = 0) Then 0 Else ((${TotalTime} / 60.) / ${count_accepted_calls}) End ;;
   value_format: "0.0"
 }
