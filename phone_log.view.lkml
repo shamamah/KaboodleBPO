@@ -214,6 +214,7 @@ view: phone_log {
       field: filter_queue_wi30_before_answer
       value: "-NULL"
     }
+    drill_fields: [phonelog_id,transaction,create_time,accept_time,transaction_processing_time,post_processing_time]
   }
 
   measure: TalkTime {
@@ -222,6 +223,7 @@ view: phone_log {
     label: "Talk/Chat Time (sec)"
     sql:  (${transaction_processing_time} * 0.0000001) ;;
     value_format: "0"
+    drill_fields: [phonelog_id,transaction,create_time,accept_time,transaction_processing_time,post_processing_time]
   }
 
   measure: PostProcessingTime {
@@ -239,6 +241,7 @@ view: phone_log {
     label: "Talk/Chat Time inc PP (sec)"
     sql:  (${total_time} * 0.0000001) ;;
     value_format: "0"
+    drill_fields: [phonelog_id,transaction,create_time,accept_time,transaction_processing_time,post_processing_time]
   }
 
   measure: PercentAnsweredWithin30Seconds {
@@ -255,18 +258,28 @@ view: phone_log {
     value_format: "0.00\%"
   }
 
-measure: AverageTalkTime_sec {
-  type: number
-  label: "Talk/Chat Average Time (sec)"
-  sql: case when (${count_accepted_calls} = 0) Then 0 Else (${TotalTime} / ${count_accepted_calls}) End ;;
-  value_format: "0.0"
-}
+  measure: AverageTalkTime_sec {
+    type: number
+    label: "Talk/Chat Average Time (sec)"
+    sql: case when (${count_accepted_calls} = 0) Then 0 Else (${TotalTime} / ${count_accepted_calls}) End ;;
+    value_format: "0.0"
+  }
 
-measure: AverageTalkTime_min {
-  type: number
-  label: "Talk/Chat Average Time (min)"
-  sql: case when (${count_accepted_calls} = 0) Then 0 Else ((${TotalTime} / 60.) / ${count_accepted_calls}) End ;;
-  value_format: "0.0"
-}
+  measure: AverageTalkTime_min {
+    type: number
+    label: "Talk/Chat Average Time (min)"
+    sql: case when (${count_accepted_calls} = 0) Then 0 Else ((${TotalTime} / 60.) / ${count_accepted_calls}) End ;;
+    value_format: "0.0"
+  }
 
-}
+  dimension_group: AnsweredWithinTime {
+    type: time
+    timeframes: [time]
+    sql: CASE WHEN (${accept_time} > '1900/01/01')
+          THEN datediff(s, ${create_time}, ${accept_time})
+          ELSE NULL
+          END ;;
+
+    }
+
+  }
