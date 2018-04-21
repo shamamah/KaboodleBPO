@@ -272,14 +272,15 @@ view: phone_log {
     value_format: "0.0"
   }
 
-  dimension_group: AnsweredWithinTime {
-    type: time
-    timeframes: [time]
+  dimension : TimeAnsweredWithin {
+    type: tier
+    label: "Time in Answering"
+    tiers: [31, 61, 91, 121]
+    style: integer
     sql: CASE WHEN (${accept_time} > '1900/01/01')
-          THEN datediff(s, ${create_time}, ${accept_time})
-          ELSE NULL
-          END ;;
-
-    }
-
+      THEN datediff(s, ${create_time}, ${accept_time})
+      ELSE -1
+    END ;;
+    value_format: "0"
   }
+}
