@@ -187,6 +187,7 @@ view: phone_log {
       field: filter_accepted_calls
       value: "-NULL"
     }
+    drill_fields: [phonelog_id,transaction,create_time,accept_time,transaction_processing_time,post_processing_time, TotalTime_min]
   }
 
   measure: count_abandoned_calls {
@@ -196,6 +197,7 @@ view: phone_log {
       field: filter_accepted_calls
       value: "NULL"
     }
+    drill_fields: [phonelog_id,transaction,create_time,accept_time,transaction_processing_time,post_processing_time]
   }
 
   dimension: filter_queue_wi30_before_answer {
@@ -244,6 +246,16 @@ view: phone_log {
     drill_fields: [phonelog_id,transaction,create_time,accept_time,transaction_processing_time,post_processing_time]
   }
 
+  measure: TotalTime_min {
+    #(transaction_processing_time * POWER(10.00000000000,-7))
+    type: sum
+    hidden: yes
+    label: "Talk/Chat Time inc PP (sec)"
+    sql:  (${total_time} * 0.0000001) ;;
+    value_format: "0.0"
+    drill_fields: [phonelog_id,transaction,create_time,accept_time,transaction_processing_time,post_processing_time]
+  }
+
   measure: PercentAnsweredWithin30Seconds {
     type: number
     label: "Calls/Chats Answered within 30 sec %"
@@ -274,13 +286,31 @@ view: phone_log {
 
   dimension : TimeAnsweredWithin {
     type: tier
-    label: "Time in Answering"
+    label: "Time in Answering (sec)"
     tiers: [31, 61, 91, 121]
     style: integer
     sql: CASE WHEN (${accept_time} > '1900/01/01')
       THEN datediff(s, ${create_time}, ${accept_time})
       ELSE -1
     END ;;
+    value_format: "0"
+  }
+
+  dimension : TalkTime_sec {
+    type: tier
+    label: "Call/Chat Duration (sec)"
+    tiers: [61, 121, 181, 241, 301]
+    style: integer
+    sql:  (${total_time} * 0.0000001) ;;
+    value_format: "0"
+  }
+
+  dimension : TalkTime_min {
+    type: tier
+    label: "Call/Chat Duration (min)"
+    tiers: [2, 5, 10, 15, 30]
+    style: relational
+    sql:  (${total_time} * 0.0000001 / 60.0) ;;
     value_format: "0"
   }
 }
