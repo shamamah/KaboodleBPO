@@ -7,6 +7,7 @@ include: "*.dashboard"
 fiscal_month_offset: 0
 persist_for: "30 minutes"
 
+week_start_day: sunday
 
 explore: print_and_distribution {
   description: "BPO's print and distribution operations, to gauge turnaround in print and mailing of batches in comparison to customer's SLA"

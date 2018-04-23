@@ -313,4 +313,16 @@ view: phone_log {
     sql:  (${total_time} * 0.0000001 / 60.0) ;;
     value_format: "0"
   }
+
+  dimension : Weekday {
+    type: date_day_of_week
+    label: "Weekday"
+    sql: ${TABLE}.create_time ;;
+  }
+
+  dimension : HourOfDay {
+    type: date_hour_of_day
+    label: "Hour of Day"
+    sql: ${TABLE}.create_time ;;
+  }
 }
