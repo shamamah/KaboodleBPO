@@ -260,7 +260,14 @@ view: phone_log {
     type: number
     label: "Calls/Chats Answered within 30 sec %"
     sql: case when (${count_accepted_calls} = 0) Then 0 Else ((${count_answered_calls_wi30} * 100.0) / ${count_accepted_calls}) End ;;
-    value_format: "0.00\%"
+    value_format: "0\%"
+  }
+
+  measure: PercentAnswered {
+    type: number
+    label: "Calls/Chats Answered %"
+    sql: case when (${CallCount} = 0) Then 0 Else ((${count_accepted_calls} * 100.0) / ${CallCount}) End ;;
+    value_format: "0\%"
   }
 
   measure: PercentAbandoned {
