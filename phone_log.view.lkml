@@ -335,7 +335,8 @@ view: phone_log {
   dimension : TalkTime_sec {
     type: tier
     label: "Call/Chat Duration (sec)"
-    tiers: [61, 121, 181, 241, 301]
+    #MODEIFIED INTERVALS ON 2018-05-05 PER EMAIL FROM JON
+    tiers: [31, 61, 121, 181, 241, 301]
     style: integer
     sql:  (${total_time} * 0.0000001) ;;
     value_format: "0"
