@@ -219,6 +219,35 @@ view: phone_log {
     drill_fields: [phonelog_id,transaction,create_time,accept_time,transaction_processing_time,post_processing_time]
   }
 
+  #ADDED THIS BLOCK ON 2018-05-05 PER EMAIL FROM JON INDICATING THAT % ABANDONED CALLS OVER 30 SEC IS SLA
+  dimension: filter_abandoned_after_30sec {
+    type: date
+    hidden: yes
+    sql: CASE WHEN (${accept_time} < '1900/01/01' AND datediff_big(ss, ${create_time}, ${abandon_time}) > 30)
+        THEN datediff_big(ss, ${create_time}, ${abandon_time})
+        ELSE NULL
+      END ;;
+  }
+
+  measure:  abandoned_after_30sec {
+    type: count
+    label: "Calls/Chats Abandoned After 30 sec"
+    filters: {
+      field: filter_abandoned_after_30sec
+      value: "-NULL"
+    }
+    drill_fields: [phonelog_id,transaction,create_time,accept_time,transaction_processing_time,post_processing_time]
+  }
+
+  measure: PercentAbandonedAfter30Seconds {
+    type: number
+    hidden: no
+    label: "Calls/Chats Abandoned After 30 sec %"
+    sql: case when (${count_accepted_calls} = 0) Then 0 Else ((${abandoned_after_30sec} * 100.0) / ${count_accepted_calls}) End ;;
+    value_format: "0\%"
+  }
+  #END BLOCK -- 2018-05-05 PER EMAIL FROM JON INDICATING THAT % ABANDONED CALLS OVER 30 SEC IS SLA
+
   measure: TalkTime {
     #(transaction_processing_time * POWER(10.00000000000,-7))
     type: sum
