@@ -244,7 +244,7 @@ view: phone_log {
     hidden: no
     label: "Calls/Chats Abandoned After 30 sec %"
     sql: case when (${count_accepted_calls} = 0) Then 0 Else ((${abandoned_after_30sec} * 100.0) / ${count_accepted_calls}) End ;;
-    value_format: "0\%"
+    value_format: "0.00\%"
   }
   #END BLOCK -- 2018-05-05 PER EMAIL FROM JON INDICATING THAT % ABANDONED CALLS OVER 30 SEC IS SLA
 
@@ -289,7 +289,7 @@ view: phone_log {
     type: number
     label: "Calls/Chats Answered within 30 sec %"
     sql: case when (${count_accepted_calls} = 0) Then 0 Else ((${count_answered_calls_wi30} * 100.0) / ${count_accepted_calls}) End ;;
-    value_format: "0\%"
+    value_format: "0.00\%"
   }
 
   measure: PercentAnswered {
