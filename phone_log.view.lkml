@@ -172,6 +172,17 @@ view: phone_log {
     drill_fields: [phonelog_id,transaction,create_time,accept_time]
   }
 
+  #ADDED THIS MEASURE ON 2018-05-14 PER EMAIL FROM JON TO USE 4 WEEKS 'LOOKPBACK' PERIOD TO COUNT FTE NEED
+  measure: FTE_Count {
+    type: number
+    #CallCount divided by 8 (for # of calls per hour per FTE) divided by 4 (for 4 week loopback)
+    sql: (${CallCount} / 8.0) / 4.0 ;;
+    label: "FTE Count"
+    value_format: "0.#"
+    drill_fields: [phonelog_id,transaction,create_time,accept_time]
+  }
+  #END BLOCK -- 2018-05-14
+
   dimension: filter_accepted_calls {
     type: date
     hidden: yes
@@ -353,7 +364,7 @@ view: phone_log {
 
   dimension : Weekday {
     type: date_day_of_week
-    label: "Weekday"
+    label: "Day of Week"
     sql: ${TABLE}.create_time ;;
   }
 
