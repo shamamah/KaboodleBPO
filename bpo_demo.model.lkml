@@ -1,5 +1,5 @@
-label: "Kaboodle BPO"
-connection: "bpo"
+label: "BPO_Demo"
+connection: "bpo_demo"
 
 include: "*.view"
 include: "*.dashboard"
@@ -12,7 +12,7 @@ week_start_day: sunday
 explore: print_and_distribution {
   description: "BPO's print and distribution operations, to gauge turnaround in print and mailing of batches in comparison to customer's SLA"
   label: "Actual vs SLA"
-  group_label: "BPO: Print & Distribution"
+  group_label: "DEMO:"
   view_label: "Service Level Agreement"
   hidden: no
   sql_always_where: ${service_type.servicetype_id}=1 ;;    #servicetype_id = 1 is for "Print & Distribution as in the table"
@@ -88,7 +88,7 @@ explore: print_and_distribution {
 explore: postage_data {
   description: "BPO's postage usage measure"
   label: "Postage Meter"
-  group_label: "BPO: Print & Distribution"
+  group_label: "DEMO:"
   view_label: "Postage Usage"
   persist_for: "4 hours"
   from: postage_data
@@ -172,7 +172,7 @@ explore: postage_data {
 explore: phone_log {
   description: "BPO's Customer Service Performance"
   label: "Customer Service (Phone/Chat)"
-  group_label: "BPO: Customer Service"
+  group_label: "DEMO:"
   view_label: "Phone Log"
   hidden: no
 
@@ -230,7 +230,7 @@ explore: phone_log {
     view_label: "Customer Service Representative"
     sql_on: ${phone_log.users_id} = ${users.users_id} ;;
     sql_where: ${phone_log.users_id} <> 0  ;;
-    }
+  }
 
   join: user_type {
     type: left_outer

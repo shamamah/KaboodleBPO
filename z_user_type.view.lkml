@@ -3,7 +3,7 @@ view: user_type {
 
   dimension: dscr {
     type: string
-    label: "User Type"
+    label: "Employee Role"
     sql: ${TABLE}.dscr ;;
   }
 
