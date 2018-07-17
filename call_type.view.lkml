@@ -1,13 +1,20 @@
-view: user_type {
-  sql_table_name: dbo.UserType ;;
+view: call_type {
+  sql_table_name: pho.CallType ;;
+
+  dimension: calltype_id {
+    hidden: yes
+    type: number
+    sql: ${TABLE}.calltype_id ;;
+  }
 
   dimension: dscr {
     type: string
-    label: "Role"
+    label: "Call Type"
     sql: ${TABLE}.dscr ;;
   }
 
   dimension_group: last_modified {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -18,11 +25,11 @@ view: user_type {
       quarter,
       year
     ]
-    hidden: yes
     sql: ${TABLE}.last_modified_date ;;
   }
 
   dimension_group: pcadded {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -33,19 +40,12 @@ view: user_type {
       quarter,
       year
     ]
-    hidden: yes
     sql: ${TABLE}.pcadded_date ;;
   }
 
-  dimension: usertype_id {
-    type: number
-    hidden: yes
-    sql: ${TABLE}.usertype_id ;;
-  }
-
   measure: count {
-    type: count
     hidden: yes
+    type: count
     drill_fields: []
   }
 }

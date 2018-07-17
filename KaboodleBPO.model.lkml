@@ -2,7 +2,7 @@ label: "Kaboodle BPO"
 connection: "bpo"
 
 include: "*.view"
-include: "*.dashboard"
+#include: "*.dashboard"
 
 fiscal_month_offset: 0
 persist_for: "30 minutes"
@@ -173,14 +173,15 @@ explore: phone_log {
   description: "BPO's Customer Service Performance"
   label: "Customer Service (Phone/Chat)"
   group_label: "BPO: Customer Service"
-  view_label: "Phone Log"
+  view_label: "Call/Chat Characteristics"
   hidden: no
 
-  #sql_always_where: ${service_type.servicetype_id}=4 ;;    #servicetype_id = 4 is for "Customer Support as in the table"
   persist_for: "1 hours"
   from: phone_log
   view_name: phone_log
   sql_table_name: pho.PhoneLog ;;
+  sql_always_where: ((CASE WHEN ((ISNULL(from_transfer,0)=0) AND (ISNULL(from_conference,0)=0)) THEN 1 ELSE 0 END) <> 0)
+      AND ${direction_type.directiontype_id} = 1 AND LEFT(${customer.customer_name},7) <> 'Covenir' ;;
 
   #fields: []
   #always_filter: {}
@@ -191,7 +192,7 @@ explore: phone_log {
     relationship: many_to_one
     from: "channel_type"
     sql_table_name: pho.ChannelType ;;
-    view_label: "Channel"
+    view_label: "Call/Chat Characteristics"
     sql_on: ${phone_log.channeltype_id} = ${channel_type.channeltype_id} ;;
   }
 
@@ -200,7 +201,7 @@ explore: phone_log {
     relationship: many_to_one
     from: "media_type"
     sql_table_name: pho.MediaType ;;
-    view_label: "Media"
+    view_label: "Call/Chat Characteristics"
     sql_on: ${phone_log.mediatype_id} = ${media_type.mediatype_id} ;;
   }
 
@@ -209,8 +210,26 @@ explore: phone_log {
     relationship: many_to_one
     from: "queue_type"
     sql_table_name: pho.QueueType ;;
-    view_label: "Queue"
+    view_label: "Call/Chat Characteristics"
     sql_on: ${phone_log.queuetype_id} = ${queue_type.queuetype_id} ;;
+  }
+
+  join: direction_type {
+    type: inner
+    relationship: many_to_one
+    from: "direction_type"
+    sql_table_name: pho.DirectionType ;;
+    view_label: "Call/Chat Characteristics"
+    sql_on: ${phone_log.directiontype_id} = ${direction_type.directiontype_id} ;;
+  }
+
+  join: call_type {
+    type: inner
+    relationship: many_to_one
+    from: "call_type"
+    sql_table_name: pho.CallType ;;
+    view_label: "Call/Chat Characteristics"
+    sql_on: ${phone_log.calltype_id} = ${call_type.calltype_id} ;;
   }
 
   join: customer {
@@ -227,7 +246,7 @@ explore: phone_log {
     relationship: many_to_one
     from: "users"
     sql_table_name: dbo.users ;;
-    view_label: "Customer Service Representative"
+    view_label: "CSR"
     sql_on: ${phone_log.users_id} = ${users.users_id} ;;
     sql_where: ${phone_log.users_id} <> 0  ;;
     }
@@ -237,7 +256,7 @@ explore: phone_log {
     relationship: many_to_one
     from: "user_type"
     sql_table_name: dbo.usertype ;;
-    view_label: "Employee Role"
+    view_label: "CSR"
     sql_on: ${users.usertype_id} = ${user_type.usertype_id} ;;
   }
 }
