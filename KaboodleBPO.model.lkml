@@ -176,13 +176,14 @@ explore: phone_log {
   view_label: "Call/Chat Characteristics"
   hidden: no
 
-  persist_for: "1 hours"
+  #persist_for: "1 hours"
   from: phone_log
   view_name: phone_log
   sql_table_name: pho.PhoneLog ;;
   sql_always_where: ((CASE WHEN ((ISNULL(from_transfer,0)=0) AND (ISNULL(from_conference,0)=0)) THEN 1 ELSE 0 END) <> 0)
       AND ${direction_type.directiontype_id} = 1 AND LEFT(${customer.customer_name},7) <> 'Covenir'
-      AND CAST(create_time as time) BETWEEN '08:00:00.0000000' AND '19:59:59.9999999' ;;
+      AND CAST(create_time as time) BETWEEN '08:00:00.0000000' AND '19:59:59.9999999'
+      AND datepart(dw,create_time) <> 1 and datepart(dw,create_time) <> 7  ;;
 
   #fields: []
   #always_filter: {}
