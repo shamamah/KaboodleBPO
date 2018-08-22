@@ -181,9 +181,15 @@ explore: phone_log {
   view_name: phone_log
   sql_table_name: pho.PhoneLog ;;
   sql_always_where: ((CASE WHEN ((ISNULL(from_transfer,0)=0) AND (ISNULL(from_conference,0)=0)) THEN 1 ELSE 0 END) <> 0)
-      AND ${direction_type.directiontype_id} = 1 AND LEFT(${customer.customer_name},7) <> 'Covenir'
+      --Next condition: Incoming calls only
+      AND ${direction_type.directiontype_id} = 1
+      --Next condition: Exclude when customer name is 'Covenir'
+      AND LEFT(${customer.customer_name},7) <> 'Covenir'
+      --Next condition: removed since it doesn't take in consideration answered calls outside of the 8 to 8 time frame. Replaced by the condition 2 lines down.
       --AND CAST(create_time as time) BETWEEN '08:00:00.0000000' AND '19:59:59.9999999'
+      --Next condition: Exclude weekends, only counting weekdays.
       AND datepart(dw,create_time) <> 1 and datepart(dw,create_time) <> 7
+      --Next condition: Answered calls always counts, but abandoned calls only counts during 8am to 8pm weekdays.
       AND ((CASE WHEN ((${accept_time} > '1900-01-01') OR (CAST(create_time as time) BETWEEN '08:00:00.0000000' AND '19:59:59.9999999')) THEN 1 ELSE 0 END) <> 0)
       ;;
 
