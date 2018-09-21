@@ -197,76 +197,85 @@ explore: phone_log {
   #always_filter: {}
   #always_join: []
 
-  join: channel_type {
-    type: inner
-    relationship: many_to_one
-    from: "channel_type"
-    sql_table_name: pho.ChannelType ;;
-    view_label: "Call/Chat Characteristics"
-    sql_on: ${phone_log.channeltype_id} = ${channel_type.channeltype_id} ;;
-  }
-
-  join: media_type {
-    type: inner
-    relationship: many_to_one
-    from: "media_type"
-    sql_table_name: pho.MediaType ;;
-    view_label: "Call/Chat Characteristics"
-    sql_on: ${phone_log.mediatype_id} = ${media_type.mediatype_id} ;;
-  }
-
-  join: queue_type {
-    type: inner
-    relationship: many_to_one
-    from: "queue_type"
-    sql_table_name: pho.QueueType ;;
-    view_label: "Call/Chat Characteristics"
-    sql_on: ${phone_log.queuetype_id} = ${queue_type.queuetype_id} ;;
-  }
-
-  join: direction_type {
-    type: inner
-    relationship: many_to_one
-    from: "direction_type"
-    sql_table_name: pho.DirectionType ;;
-    view_label: "Call/Chat Characteristics"
-    sql_on: ${phone_log.directiontype_id} = ${direction_type.directiontype_id} ;;
-  }
-
-  join: call_type {
-    type: inner
-    relationship: many_to_one
-    from: "call_type"
-    sql_table_name: pho.CallType ;;
-    view_label: "Call/Chat Characteristics"
-    sql_on: ${phone_log.calltype_id} = ${call_type.calltype_id} ;;
-  }
-
-  join: customer {
-    type: inner
-    relationship: many_to_one
-    from: "customer"
-    sql_table_name: dbo.customer ;;
-    view_label: "Customer"
-    sql_on: ${channel_type.customer_id} = ${customer.customer_id} ;;
-  }
-
-  join: users {
-    type: inner
-    relationship: many_to_one
-    from: "users"
-    sql_table_name: dbo.users ;;
-    view_label: "CSR"
-    sql_on: ${phone_log.users_id} = ${users.users_id} ;;
-    sql_where: ${phone_log.users_id} <> 0  ;;
+    join: channel_type {
+      type: inner
+      relationship: many_to_one
+      from: "channel_type"
+      sql_table_name: pho.ChannelType ;;
+      view_label: "Call/Chat Characteristics"
+      sql_on: ${phone_log.channeltype_id} = ${channel_type.channeltype_id} ;;
     }
 
-  join: user_type {
-    type: left_outer
-    relationship: many_to_one
-    from: "user_type"
-    sql_table_name: dbo.usertype ;;
-    view_label: "CSR"
-    sql_on: ${users.usertype_id} = ${user_type.usertype_id} ;;
+    join: media_type {
+      type: inner
+      relationship: many_to_one
+      from: "media_type"
+      sql_table_name: pho.MediaType ;;
+      view_label: "Call/Chat Characteristics"
+      sql_on: ${phone_log.mediatype_id} = ${media_type.mediatype_id} ;;
+    }
+
+    join: queue_type {
+      type: inner
+      relationship: many_to_one
+      from: "queue_type"
+      sql_table_name: pho.QueueType ;;
+      view_label: "Call/Chat Characteristics"
+      sql_on: ${phone_log.queuetype_id} = ${queue_type.queuetype_id} ;;
+
+      # MN 2018-09-06 Remove calls that never made it to a queue. A blank queue in the source data translates to queuetype_id 24. We can eliminate based on this ID.
+      sql_where: ${queue_type.queuetype_id} <> 24 ;;
+
+      # MN 2018-09-06 2.  Remove the criteria checking for a user type of Customer Service and instead filter on the new data point of servicetype_id on pho.queuetype.
+      # We should only include queues that have a servicetype_id of 4 (customer support). Doing this will also correct item 1. We have had some folks change roles,
+      # and thusly change user types. We don’t want to remove them from the call log data review due to this.
+      sql_where: ${queue_type.servicetype_id} = 4 ;;
+
+    }
+
+    join: direction_type {
+      type: inner
+      relationship: many_to_one
+      from: "direction_type"
+      sql_table_name: pho.DirectionType ;;
+      view_label: "Call/Chat Characteristics"
+      sql_on: ${phone_log.directiontype_id} = ${direction_type.directiontype_id} ;;
+    }
+
+    join: call_type {
+      type: inner
+      relationship: many_to_one
+      from: "call_type"
+      sql_table_name: pho.CallType ;;
+      view_label: "Call/Chat Characteristics"
+      sql_on: ${phone_log.calltype_id} = ${call_type.calltype_id} ;;
+    }
+
+    join: customer {
+      type: inner
+      relationship: many_to_one
+      from: "customer"
+      sql_table_name: dbo.customer ;;
+      view_label: "Customer"
+      sql_on: ${channel_type.customer_id} = ${customer.customer_id} ;;
+    }
+
+    join: users {
+      type: inner
+      relationship: many_to_one
+      from: "users"
+      sql_table_name: dbo.users ;;
+      view_label: "CSR"
+      sql_on: ${phone_log.users_id} = ${users.users_id} ;;
+      sql_where: ${phone_log.users_id} <> 0  ;;
+    }
+
+    join: user_type {
+      type: left_outer
+      relationship: many_to_one
+      from: "user_type"
+      sql_table_name: dbo.usertype ;;
+      view_label: "CSR"
+      sql_on: ${users.usertype_id} = ${user_type.usertype_id} ;;
+    }
   }
-}
