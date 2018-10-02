@@ -43,6 +43,15 @@ view: phone_log {
     sql: ${TABLE}.create_time ;;
   }
 
+  dimension: time_12h {
+    type: string
+    label: "Hour of Day (12hr)"
+    hidden: no
+    sql: CASE WHEN DATEPART( HH , ${TABLE}.create_time) > 12 THEN CAST ( ( DATEPART( HH , ${TABLE}.create_time)  % 12 ) AS VARCHAR) + ' PM'
+                  ELSE  CAST ( ( DATEPART( HH , ${TABLE}.create_time)   ) AS VARCHAR) + ' AM'
+              END ;;
+  }
+
   dimension: hold_count {
     type: number
     hidden: yes
@@ -382,7 +391,7 @@ view: phone_log {
 
   dimension : HourOfDay {
     type: date_hour_of_day
-    label: "Hour of Day"
+    label: "Hour of Day (24hr)"
     sql: ${TABLE}.create_time ;;
   }
 }
