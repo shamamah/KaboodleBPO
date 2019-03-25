@@ -197,7 +197,9 @@ view: phone_log {
   measure: FTE_Count {
     type: number
     #CallCount divided by 8 (for # of calls per hour per FTE) divided by 4 (for 4 week loopback)
-    sql: (${CallCount} / 8.0) / 4.0 ;;
+    #sql: (${CallCount} / 8.0) / 4.0 ;;
+    # 2019-03-25  Per Jon's request, the hourly rate is changed from 8 to 10, for the number of calls per CSR
+    sql: (${CallCount} / 10.0) / 4.0 ;;
     label: "FTE Count"
     value_format: "0.#"
     drill_fields: [phonelog_id,transaction,create_time,accept_time]
